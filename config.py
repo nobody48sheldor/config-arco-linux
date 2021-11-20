@@ -33,7 +33,7 @@ from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
-#import arcobattery
+import arcobattery
 
 #mod4 or mod = super key
 mod = "mod4"
@@ -170,7 +170,8 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",]
 #group_names = ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave",]
 
 #group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "0",]
-group_labels = ["", "", "", "", "", "", "", "", "", "",]
+#group_labels = ["", "", "", "", "", "", "", "", "", "",]
+group_labels = ["∮", "∂", "∯", "∇", "∑", "∏", "∬", "", "∫", "√"]
 #group_labels = ["Web", "Edit/chat", "Image", "Gimp", "Meld", "Video", "Vb", "Files", "Mail", "Music",]
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall",]
@@ -191,8 +192,8 @@ for i in groups:
         Key([mod], i.name, lazy.group[i.name].toscreen()),
         Key([mod], "Tab", lazy.screen.next_group()),
         Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
-        Key(["mod1"], "Tab", lazy.screen.next_group()),
-        Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
+        Key(["mod1"], "Tab", lazy.to_screen(1)),
+        Key(["mod1", "shift"], "Tab", lazy.to_screen(0)),
 
 # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
         #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
@@ -248,8 +249,8 @@ colors = init_colors()
 
 def init_widgets_defaults():
     return dict(font="Noto Sans",
-                fontsize = 12,
-                padding = 2,
+                fontsize = 16,
+                padding = 10,
                 background=colors[1])
 
 widget_defaults = init_widgets_defaults()
@@ -258,10 +259,10 @@ def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
                widget.GroupBox(font="FontAwesome",
-                        fontsize = 18,
+                        fontsize = 20,
                         margin_y = 2,
-                        margin_x = 0,
-                        padding_y = 6,
+                        margin_x = 6,
+                        padding_y = 10,
                         padding_x = 5,
                         borderwidth = 0,
                         disable_drag = True,
@@ -281,7 +282,8 @@ def init_widgets_list():
                         background = colors[13]
                         ),
                widget.CurrentLayout(
-                        font = "Noto Sans Bold",
+                        font = "Hack Bold",
+                        fontsize = 18,
                         foreground = colors[11],
                         background = colors[13]
                         ),
@@ -291,8 +293,8 @@ def init_widgets_list():
                         foreground = colors[11],
                         background = colors[13]
                         ),
-               widget.WindowName(font="Noto Sans",
-                        fontsize = 12,
+               widget.WindowName(font="Hack",
+                        fontsize = 18,
                         foreground = colors[11],
                         background = colors[14],
                         ),
@@ -458,8 +460,8 @@ widgets_screen2 = init_widgets_screen2()
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26, opacity=0.6)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=26, opacity=0.6))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=32, opacity=0.6, margin=[8, 8, 0, 8])),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=32, opacity=0.6, margin=[8, 8, 0, 8]))]
 screens = init_screens()
 
 
@@ -572,4 +574,4 @@ auto_fullscreen = True
 
 focus_on_window_activation = "focus" # or smart
 
-wmname = "LG3D"
+wmname = "I use arch btw (qtile)"

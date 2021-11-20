@@ -48,6 +48,7 @@ picom --config $HOME/.config/qtile/scripts/picom.conf &
 run volumeicon &
 #run discord &
 nitrogen --restore &
+xrandr --output HDMI-1-0 --mode 1920x1080 --rate 144 --right-of LVDS-1
 #run caffeine -a &
 #run vivaldi-stable &
 #run firefox &
